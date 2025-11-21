@@ -74,12 +74,21 @@ def login_view(request):
         email = request.POST['email']
         password = request.POST['password']
         user = authenticate(request, email=email, password=password)
+
         if user:
             login(request, user)
-            return redirect('Screensite:apply')
+
+            # 🟢 Check if user already submitted profile
+            if NewJoineProfile.objects.filter(user=user).exists():
+                return redirect('Screensite:home')   # send to home page
+            else:
+                return redirect('Screensite:apply')  # send to form page
+
         else:
             return render(request, 'Screensite/login.html', {'error': 'Invalid credentials'})
+
     return render(request, 'Screensite/login.html')
+
 
 
 
@@ -225,6 +234,8 @@ def newjoinee_apply(request):
 @login_required(login_url='/Screensite/login/')
 def newjoinee_apply(request):
     if request.method == "POST":
+        if NewJoineProfile.objects.filter(user=request.user).exists():
+            return redirect('Screensite:home')
 
         FullName = request.POST.get('FullName')
         Resume = request.FILES.get('Resume')

@@ -1,0 +1,24 @@
+{% extends 'Projects/base_dashboard.html' %}
+{% block content %}
+
+<div class="page-heading">
+    <h1>Assign Team Members</h1>
+</div>
+
+<form method="POST" class="form-card">
+    {% csrf_token %}
+
+    <div class="input-group">
+        <label>Select Members</label>
+        <select name="members" multiple class="multi-select" required>
+            {% for emp in employees %}
+                <option value="{{ emp.id }}">{{ emp.FullName }} ({{ emp.get_role_display }})</option>
+            {% endfor %}
+        </select>
+        <p class="note">Hold CTRL to select multiple members.</p>
+    </div>
+
+    <button class="btn-submit" type="submit">Assign Members</button>
+</form>
+
+{% endblock %}

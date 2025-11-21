@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
@@ -173,7 +175,7 @@ class User(AbstractBaseUser,PermissionsMixin):
 class NewJoineProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='newjoine_profiles')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='newjoine_profiles')
     FullName = models.CharField(max_length=250)
     Resume = models.FileField(upload_to='Profile/Resumes/')
     AdharCard = models.ImageField(upload_to='Profile/Adhar/')
@@ -188,7 +190,7 @@ class InternProfile(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='intern_profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='intern_profile')
     FullName = models.CharField(max_length=250, blank=False,null=False)
     skills = ArrayField(models.CharField(max_length=50), blank=False, null=False, default=list)
     Task = models.CharField(max_length=200,null=True)
@@ -203,7 +205,7 @@ class EmployeeProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee_profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='employee_profile')
     salary = models.DecimalField(null=False,blank=False,max_digits=10, decimal_places=2)
     phone = models.CharField(max_length=25,unique=False,blank=True,null=True)
     Bio = models.FileField(upload_to='Profile/BioFile',blank=False,null=False,default='PENDING')
@@ -223,7 +225,7 @@ class HrProfile(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='hr_profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='hr_profile')
     FullName = models.CharField(max_length=250, blank=False,null=False)
     department = models.CharField(max_length=100, blank=False,null=False)              
     position = models.CharField(max_length=100, blank=False,null=False)                
@@ -241,14 +243,14 @@ class HrProfile(models.Model):
 
 
 class ManagerProfile(models.Model):
-    
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='manager_profile')
-    FullName = models.CharField(max_length=250, blank=False,null=False)
-    department = models.CharField(max_length=100, blank=False,null=False)
-    Team = models.CharField(max_length=50,null=False,default='Pending',blank=False)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='manager_profile')
+    FullName = models.CharField(max_length=250)
+    department = models.CharField(max_length=100)
+    Team = models.CharField(max_length=50, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True) 
+    updated_at = models.DateTimeField(auto_now=True)
 
      
 
@@ -257,7 +259,7 @@ class ManagerProfile(models.Model):
 
 class OwnerProfile(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='owner_profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='owner_profile')
     FullName = models.CharField(max_length=250, blank=False,null=False)
     Experience = models.CharField(max_length=600, blank=False, null=False)
     skills = ArrayField(models.CharField(max_length=50), blank=False, null=False, default=list) 
