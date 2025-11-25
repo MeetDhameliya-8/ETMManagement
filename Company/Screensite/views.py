@@ -78,16 +78,36 @@ def login_view(request):
         if user:
             login(request, user)
 
-            # 🟢 Check if user already submitted profile
-            if NewJoineProfile.objects.filter(user=user).exists():
-                return redirect('Screensite:home')   # send to home page
-            else:
-                return redirect('Screensite:apply')  # send to form page
+            # 🔵 ROLE-BASED REDIRECTS
+            if user.role == 'NJ':  # NewJoinee
+                if NewJoineProfile.objects.filter(user=user).exists():
+                    return redirect('Screensite:home')
+                else:
+                    return redirect('Screensite:apply')
+
+            elif user.role == 'MG':  # Manager
+                return redirect('Product:manager_dashboard')
+
+            elif user.role == 'HR':
+                return redirect('HR:dashboard')
+
+            elif user.role == 'OWN':
+                return redirect('Owner:dashboard')
+
+            elif user.role == 'Emp':
+                return redirect('Employee:dashboard')
+
+            elif user.role == 'Int':
+                return redirect('Intern:dashboard')
+
+            # default fallback
+            return redirect('Screensite:home')
 
         else:
             return render(request, 'Screensite/login.html', {'error': 'Invalid credentials'})
 
     return render(request, 'Screensite/login.html')
+
 
 
 

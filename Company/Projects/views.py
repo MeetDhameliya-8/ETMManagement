@@ -7,7 +7,7 @@ from .models import Project, Task
 from .decorators import manager_required
 from django.contrib.auth.decorators import login_required
 from Profile.models import EmployeeProfile, User
- 
+
 
 def manager_required(view_func):
     def wrapper(request, *args, **kwargs):
@@ -37,9 +37,9 @@ def create_project(request):
             manager=request.user
         )
 
-        return redirect("Project:assign_members", project_id=project.id)
+        return redirect("project:assign_members", project_id=project.id)
 
-    return render(request, "Project/create_project.html")
+    return render(request, "project/create_project.html")
 
 
 
@@ -49,7 +49,7 @@ def create_project(request):
 @manager_required
 def manager_dashboard(request):
     projects = Project.objects.filter(manager=request.user)
-    return render(request, "Project/manager_dashboard.html", {"projects": projects})
+    return render(request, "project/manager_dashboard.html", {"projects": projects})
 
 
 
@@ -59,7 +59,7 @@ def manager_dashboard(request):
 @login_required
 def my_projects(request):
     projects = request.user.assigned_projects.all()
-    return render(request, "ProjectApp/my_projects.html", {"projects": projects})
+    return render(request, "project/my_projects.html", {"projects": projects})
 
 
 
@@ -81,7 +81,7 @@ def assign_members(request, project_id):
 
         return redirect("manager_dashboard")
 
-    return render(request, "Project/assign_members.html", {
+    return render(request, "project/assign_members.html", {
         "project": project,
         "employees": employees,
     })
@@ -95,7 +95,7 @@ def project_detail(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     tasks = Task.objects.filter(project=project)
 
-    return render(request, "Project/project_detail.html", {
+    return render(request, "project/project_detail.html", {
         "project": project,
         "tasks": tasks,
     })
@@ -120,15 +120,12 @@ def add_task(request, project_id):
         )
 
         # IMPORTANT: After success, redirect to project detail
-        return redirect("Project:project_detail", project_id=project.id)
+        return redirect("project:project_detail", project_id=project.id)
 
-    return render(request, "Project/add_task.html", {
+    return render(request, "project/add_task.html", {
         "project": project
     })
 
 
 
-''' well right now inside subproject folder there is app Project
-inside teplates/project these templates exist
-- add_task, assign_members, bash_dashboard,create_project,assign_members, project_detail,project_card and then in static/project/css there is one template manager_dashboard.css and inside complete another folder there 
-is a bash_dashboard.html exist which is name is screensite and that is not app with __init__ files that's how things are '''
+
