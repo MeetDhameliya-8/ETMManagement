@@ -7,14 +7,14 @@
     <h1>{{ project.title }}</h1>
 
     <!-- RIGHT SIDE (grouped) -->
-    <div style="display: flex; align-items: center; gap: 15px;">
+    <div style="display: flex; align-items: center; gap: 15px;">   
         <a href="{% url 'add_task' project.id %}" class="btn-create">+ Add Task</a>
 
         <a href="{% url 'assign_members' project.id %}" class="btn-create">
             Assign Members
         </a>
 
-        <span class="status-badge">{{ project.status }}</span>
+        <span class="status-badge" > {{ project.status }} </span>
     </div>
 
 </div>

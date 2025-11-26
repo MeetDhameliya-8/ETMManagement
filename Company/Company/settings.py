@@ -81,6 +81,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Company.wsgi.application'
 
+#5432
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -92,7 +94,7 @@ DATABASES = {
         "USER": "dnjtechx",
         "PASSWORD": "MeetDNJ@645",
         "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "PORT": "3500",
     }
 }
 

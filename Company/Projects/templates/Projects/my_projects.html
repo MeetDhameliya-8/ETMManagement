@@ -1,0 +1,36 @@
+{% extends "Projects/base_dashboard.html" %}
+
+{% block content %}
+<div class="page-heading">
+    <h1>My Projects</h1>
+    <a href="{% url 'Projects:manager_dashboard' %}" class="btn-create">Back to Dashboard</a>
+</div>
+
+<div class="project-section">
+    {% if projects %}
+        <div class="projects-grid">
+            {% for project in projects %}
+                <div class="project-card">
+                    <h3>{{ project.title }}</h3>
+                    <p>Deadline: {{ project.deadline }}</p>
+                    <p>Status: {{ project.status }}</p>
+
+                    <div class="team">
+                        {% for member in project.team_members.all %}
+                            <span class="member-tag">👤 {{ member.email }}</span>
+                        {% empty %}
+                            <span>No Members Assigned</span>
+                        {% endfor %}
+                    </div>
+
+                    <a href="{% url 'Projects:project_detail' project.id %}">
+                        <button class="view-btn">View Details</button>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No projects found.</p>
+    {% endif %}
+</div>
+{% endblock %}

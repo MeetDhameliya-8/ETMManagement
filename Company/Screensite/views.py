@@ -7,7 +7,7 @@ from Profile.models import NewJoineProfile
 from Requests.models import HRRequest
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth import logout
 
 User = get_user_model()
 
@@ -78,27 +78,18 @@ def login_view(request):
         if user:
             login(request, user)
 
+            # Normalize role once
+            role = str(user.role).upper().strip()
+
             # 🔵 ROLE-BASED REDIRECTS
-            if user.role == 'NJ':  # NewJoinee
+            if role == 'NJ':  # NewJoinee
                 if NewJoineProfile.objects.filter(user=user).exists():
                     return redirect('Screensite:home')
                 else:
                     return redirect('Screensite:apply')
 
-            elif user.role == 'MG':  # Manager
-                return redirect('Product:manager_dashboard')
-
-            elif user.role == 'HR':
-                return redirect('HR:dashboard')
-
-            elif user.role == 'OWN':
-                return redirect('Owner:dashboard')
-
-            elif user.role == 'Emp':
-                return redirect('Employee:dashboard')
-
-            elif user.role == 'Int':
-                return redirect('Intern:dashboard')
+            elif role == 'MG':  # Manager
+                return redirect('Projects:manager_dashboard')
 
             # default fallback
             return redirect('Screensite:home')
@@ -110,6 +101,10 @@ def login_view(request):
 
 
 
+
+def logout_view(request):
+    logout(request)
+    return redirect('Screensite:login')
 
 
 
@@ -301,3 +296,17 @@ hr_user = User.objects.filter(role=assigner_role).first()
 messages.info(request, "Your application is submitted. HR will be assigned soon.") # --- 4️⃣ Redirect to confirmation page ---
  return redirect('Screensite:confirmation')
 '''
+
+
+
+'''            elif user.role == 'HR':
+                return redirect('HR:dashboard')
+
+            elif user.role == 'OWN':
+                return redirect('Owner:dashboard')
+
+            elif user.role == 'Emp':
+                return redirect('Employee:dashboard')
+
+            elif user.role == 'Int':
+                return redirect('Intern:dashboard')'''

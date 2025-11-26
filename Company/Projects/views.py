@@ -7,19 +7,31 @@ from .models import Project, Task
 from .decorators import manager_required
 from django.contrib.auth.decorators import login_required
 from Profile.models import EmployeeProfile, User
+from functools import wraps
+from .models import Project
+
 
 
 def manager_required(view_func):
+    @wraps(view_func)
     def wrapper(request, *args, **kwargs):
-        if request.user.role != "MG":
-            return redirect("Screensite:home")  # or error page
+        if not request.user.is_authenticated:
+            return redirect('Screensite:login')
+
+        # normalize role and check
+        role = str(getattr(request.user, 'role', '')).upper().strip()
+        if role not in ('MG', 'MANAGER'):
+            return redirect('Screensite:home')   # redirect non-managers to home (not to dashboard)
+
         return view_func(request, *args, **kwargs)
     return wrapper
 
 
 
-  # if you save decorator there
 
+
+
+  # if you save decorator there
 @login_required(login_url='/Screensite/login/')
 def create_project(request):
     if request.user.role != "MG":
@@ -49,17 +61,23 @@ def create_project(request):
 @manager_required
 def manager_dashboard(request):
     projects = Project.objects.filter(manager=request.user)
-    return render(request, "project/manager_dashboard.html", {"projects": projects})
+    return render(request, "Projects/manager_dashboard.html", {"projects": projects})
 
 
 
 
 
 
-@login_required
+
+# Projects/views.py
+
+
+@login_required(login_url='Screensite:login')
 def my_projects(request):
-    projects = request.user.assigned_projects.all()
-    return render(request, "project/my_projects.html", {"projects": projects})
+    # show projects where the current user is manager OR part of team — adjust as needed
+    projects = Project.objects.filter(manager=request.user).prefetch_related('team_members')
+    return render(request, "Projects/my_projects.html", {"projects": projects})
+
 
 
 
@@ -95,7 +113,7 @@ def project_detail(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     tasks = Task.objects.filter(project=project)
 
-    return render(request, "project/project_detail.html", {
+    return render(request, "projects/project_detail.html", {
         "project": project,
         "tasks": tasks,
     })
