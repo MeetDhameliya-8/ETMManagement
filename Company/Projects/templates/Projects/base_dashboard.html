@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Manager Dashboard</title>
-    <link rel="stylesheet" href="{% static 'Projects/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'project/css/dashboard.css' %}">
 
 </head>
 <body>
@@ -15,9 +15,9 @@
     <aside class="sidebar">
 
         <div class="profile-card">
-            {% if user.managerprofile %}
-                <img src="{{ user.managerprofile.ProfilePic.url }}" class="profile-pic">
-                <h3>{{ user.managerprofile.FullName }}</h3>
+            {% if user.manager_profile %}
+                <img src="{{ user.manager_profile.ProfilePic.url }}" class="profile-pic">
+                <h3>{{ user.manager_profile.FullName }}</h3>
                 <p>{{ user.get_role_display }}</p>
             {% else %}
                 <img src="{% static 'product/img/default.png' %}" class="profile-pic">

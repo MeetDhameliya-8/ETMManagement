@@ -245,6 +245,7 @@ class HrProfile(models.Model):
 class ManagerProfile(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ProfilePic = models.ImageField(upload_to='ProfilePics/', null=True, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='manager_profile')
     FullName = models.CharField(max_length=250)
     department = models.CharField(max_length=100)
