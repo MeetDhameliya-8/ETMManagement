@@ -5,6 +5,10 @@
     <h1>Add Task to {{ project.title }}</h1>
 </div>
 
+
+
+
+
 <form method="POST" class="form-card">
     {% csrf_token %}
 
@@ -28,6 +32,10 @@
     </div>
 
     <button class="btn-submit" type="submit">Add Task</button>
+
+
+
+
 </form>
 
 {% endblock %}

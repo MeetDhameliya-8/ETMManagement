@@ -12,6 +12,10 @@ from .models import Project
 
 
 
+
+
+
+
 def manager_required(view_func):
     @wraps(view_func)
     def wrapper(request, *args, **kwargs):
@@ -99,7 +103,7 @@ def assign_members(request, project_id):
 
         return redirect("manager_dashboard")
 
-    return render(request, "project/assign_members.html", {
+    return render(request, "Projects/assign_members.html", {
         "project": project,
         "employees": employees,
     })
@@ -140,7 +144,7 @@ def add_task(request, project_id):
         # IMPORTANT: After success, redirect to project detail
         return redirect("project:project_detail", project_id=project.id)
 
-    return render(request, "project/add_task.html", {
+    return render(request, "projects/add_task.html", {
         "project": project
     })
 

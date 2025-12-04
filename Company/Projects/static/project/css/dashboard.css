@@ -300,12 +300,68 @@ body {
 }
 
 .task-status {
-    padding: 7px 14px;
+    display: inline-block;
+    margin-top: 10px;        /* pushes it below the description */
+    padding: 6px 14px;
     border-radius: 8px;
-    color: white;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
 }
 
-.task-status.Completed { background: #10b981; }
-.task-status.Pending { background: #fbbf24; color: black; }
-.task-status.InProgress { background: #3b82f6; }
+
+.task-status.Pending {
+    background: #f59e0b; /* yellow */
+}
+
+.task-status.InProgress {
+    background: #2253a3; /* blue */
+}
+
+.task-status.Completed {
+    background: #10b981; /* green */
+}
+
+
+
+
+
+
+
+.input-group { 
+    
+    margin-bottom: 22px; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.input-group label 
+{ margin-bottom: 6px; 
+font-weight: 600; 
+color: #1f2937;
+}
+
+
+.input-group input, 
+.input-group textarea, 
+
+
+.multi-select { 
+    padding: 14px; 
+    border-radius: 10px; 
+    font-size: 15px; 
+    border: 1px solid #cbd5e1; 
+    background: #f8fafc; 
+    transition: 0.25s ease; 
+}
+
+
+.input-group input:focus, 
+.input-group textarea:focus 
+
+{ 
+
+border-color: #2563eb; 
+box-shadow: 0 0 4px rgba(37,99,235,0.25); 
+
+}

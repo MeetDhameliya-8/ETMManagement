@@ -243,6 +243,7 @@ class HrProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True) 
 
 
+
 class ManagerProfile(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -268,6 +269,5 @@ class OwnerProfile(models.Model):
     Projects_Completed = models.IntegerField(blank=False,null=False,default='10+')
 
 
-     
 
 # Create your models here.

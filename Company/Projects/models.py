@@ -3,6 +3,8 @@ from django.db import models
 from django.conf import settings
 from Profile.models import ManagerProfile
 
+
+
 class Project(models.Model):
     manager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='managed_projects')
     title = models.CharField(max_length=200)
@@ -17,7 +19,15 @@ class Project(models.Model):
 
 
 class Task(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="tasks")
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    status = models.CharField(max_length=20, default="Pending")
+
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="tasks")    
+    title = models.CharField(max_length=200)     
+    description = models.TextField()     
+    status = models.CharField(max_length=20, default="Pending")    
+
+
+
+
+
+
+
