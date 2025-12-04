@@ -177,11 +177,12 @@ class NewJoineProfile(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='newjoine_profiles')
     FullName = models.CharField(max_length=250)
+    skill = models.CharField(max_length=150, null=True, blank=True)
     Resume = models.FileField(upload_to='Profile/Resumes/')
     AdharCard = models.ImageField(upload_to='Profile/Adhar/')
     technology = models.CharField(max_length=100, blank=True, null=True)
     Experience = models.CharField(max_length=100, blank=True, null=True)
-    
+     
     def __str__(self):
         return self.FullName
 

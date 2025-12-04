@@ -1,95 +1,209 @@
-/* ---------- GLOBAL THEME ---------- */
+/* modernized-style.css
+   2025-upgrade of the provided style.css
+   - Theme tokens (CSS variables)
+   - Fluid sizing (clamp)
+   - Accessible focus states
+   - Tactile micro-interactions (prefers-reduced-motion respected)
+   - Soft neon/glass mix with subtle gradients and glow
+   - Cleaner input/button styles
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-    font-family: 'Inter', sans-serif;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+:root{
+  --bg: #000000;
+  --surface: rgba(255,255,255,0.06);
+  --surface-strong: rgba(255,255,255,0.10);
+  --glass-border: rgba(255,255,255,0.12);
+  --accent: 255 0 51; /* use via rgb() for color-mix if needed */
+  --accent-hex: #ff0033;
+  --accent-hex-2: #ff6a85;
+  --muted: #cfcfcf;
+
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --container-w: 380px;
+
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.6);
+  --glow: 0 6px 30px rgba(255, 0, 51, 0.12);
+
+  --fs-h2: clamp(1.25rem, 2.5vw, 1.75rem);
+  --fs-base: clamp(0.95rem, 1.5vw, 1rem);
+  --pad: clamp(16px, 2.2vw, 28px);
+}
+
+/* Respect dark/light preference if ever switched */
+@media (prefers-color-scheme: light){
+  :root{ --bg: #0b0b0b; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  :root{ --reduced-motion: 1; }
+}
+
+/* ---------- GLOBAL ---------- */
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(800px 400px at 10% 10%, rgba(255,20,60,0.04), transparent 10%), var(--bg);
+  color: #fff;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container{
+  width: 100%;
+  max-width: calc(var(--container-w) + 40px);
+  padding: 20px;
 }
 
 /* ---------- GLASS CONTAINER ---------- */
-.glass-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 16px;
-    padding: 40px 35px;
-    width: 380px;
-    box-shadow: 0 4px 30px rgba(255, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+.glass-card{
+  width: var(--container-w);
+  padding: var(--pad);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  background-color: var(--surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft), var(--glow);
+  backdrop-filter: blur(10px) saturate(1.06);
+  -webkit-backdrop-filter: blur(10px) saturate(1.06);
+  display: block;
+  margin: 12px auto;
+  position: relative;
+  overflow: clip;
+}
+
+/* small subtle top-right glossy accent */
+.glass-card::before{
+  content: '';
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent 25%);
+  transform: rotate(18deg);
+  pointer-events: none;
+  filter: blur(10px);
+  opacity: 0.85;
 }
 
 /* ---------- HEADERS ---------- */
-h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    font-weight: 700;
-    font-size: 28px;
-    letter-spacing: 1px;
+h2{
+  margin: 0 0 18px 0;
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-align: center;
+}
+
+/* decorative underline */
+h2 + .underline{
+  height: 6px;
+  width: 64px;
+  margin: 12px auto 22px auto;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--accent-hex), var(--accent-hex-2));
+  box-shadow: 0 6px 20px rgba(255,0,51,0.12);
 }
 
 /* ---------- INPUTS ---------- */
-input, select {
-    width: 100%;
-    padding: 12px 14px;
-    margin-bottom: 18px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.06);
-    color: #fff;
-    font-size: 15px;
-    outline: none;
+input, select, textarea{
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color: #fff;
+  font-size: var(--fs-base);
+  outline: none;
+  transition: box-shadow 220ms cubic-bezier(.2,.9,.3,1), transform 220ms;
 }
 
-input::placeholder {
-    color: #ccc;
+input::placeholder, textarea::placeholder{ color: color-mix(in srgb, #fff 60%, transparent); }
+
+input[type="file"]{ padding: 8px 10px; }
+
+input:focus, select:focus, textarea:focus{
+  box-shadow: 0 6px 22px rgba(255,0,51,0.12);
+  transform: translateY(-2px);
+  border-color: rgba(var(--accent),0.95);
 }
 
-input[type=file] {
-    padding: 8px;
-}
+/* clear file input visual */
+input[type="file"]::-webkit-file-upload-button{ background: transparent; border: none; padding: 0; }
 
 /* ---------- BUTTON ---------- */
-button, .btn {
-    width: 100%;
-    padding: 12px 14px;
-    border: none;
-    border-radius: 8px;
-    background: #ff0033;
-    color: #fff;
-    cursor: pointer;
-    font-size: 17px;
-    font-weight: 600;
-    transition: 0.2s;
-    display: block;
-    text-align: center;
-    text-decoration: none;
+button, .btn{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, var(--accent-hex), var(--accent-hex-2));
+  border: none;
+  color: white;
+  font-size: clamp(1rem, 1.6vw, 1.05rem);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(255, 20, 60, 0.12), 0 2px 0 rgba(255,255,255,0.02) inset;
+  transition: transform 180ms cubic-bezier(.2,.9,.3,1), box-shadow 180ms;
 }
 
-button:hover, .btn:hover {
-    background: #ff1a4d;
+button:hover, .btn:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px rgba(255,20,60,0.16);
 }
+
+button:active, .btn:active{ transform: translateY(-1px); }
+
+/* disabled state */
+button[disabled], .btn[disabled]{ opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
 
 /* ---------- LINKS ---------- */
-a {
-    color: #ff0033;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
+a{ color: var(--accent-hex); font-weight: 600; text-decoration: none; }
+a:hover{ text-decoration: underline; }
 
 /* ---------- ERROR TEXT ---------- */
-.error {
-    color: #ff5555;
-    text-align: center;
-    margin-bottom: 15px;
+.error{
+  color: #ff6b6b;
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
+
+/* ---------- UTILITY & ACCESSIBILITY ---------- */
+:where(button, a, input, select, textarea):focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--accent-hex) 30%, white 6%);
+  outline-offset: 4px;
+}
+
+.sr-only{
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* layout responsiveness for small screens */
+@media (max-width: 420px){
+  :root{ --container-w: calc(100% - 48px); }
+  .glass-card{ width: calc(100% - 24px); padding: 18px; }
+  .glass-card::before{ display: none; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  input:focus, button, .glass-card, .glass-card::before{ transition: none !important; transform: none !important; }
+}
+
+/* End of modernized-style.css */

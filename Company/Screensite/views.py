@@ -280,11 +280,16 @@ def newjoinee_apply(request):
     return render(request, "Screensite/newjoine_profile.html")
 
 
+
+def mission(request):
+    return render(request, "Screensite/mission.html")
+
 def home(request):
     return render(request, "Screensite/home.html")
 
 def confirmation(request):
     return render(request, 'Screensite/confirmation.html')
+
 
 
 '''
