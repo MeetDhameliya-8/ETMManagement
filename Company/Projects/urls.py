@@ -14,6 +14,7 @@ urlpatterns = [
 
 
     #forms
+    path("pjdashboard", views.projects_dashboard, name="project_dashboard"),
 
     path("employee/update/",views.employee_update_view, name="employee_update"),
     path("intern/update/", views.intern_update_view, name="intern_update"),

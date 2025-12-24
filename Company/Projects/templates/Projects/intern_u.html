@@ -9,7 +9,7 @@
       {% csrf_token %}
       {{ form.as_p }}
       <button class="btn btn-primary mt-2" type="submit">Submit</button>
-      <a class="btn btn-link" href="{% url 'intern_list' %}">View all</a>
+      <a class="btn btn-link" href="{% url 'Projects:intern_update' %}">View all</a>
     </form>
   </div>
 </div>

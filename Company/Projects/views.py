@@ -26,7 +26,7 @@ def employee_update_view(request):
     else:
         form = EmployeeUpdateForm()
 
-    return render(request, "Project/employee_update_form.html", {"form": form})
+    return render(request, "Projects/employee_u.html", {"form": form})
 
 
 
@@ -39,7 +39,7 @@ def intern_update_view(request):
     else:
         form = InternUpdateForm()
 
-    return render(request, "Projects/intern_update_form.html", {"form": form})
+    return render(request, "Projects/intern_u.html", {"form": form})
 
 
 
@@ -53,7 +53,7 @@ def newjoinee_update_view(request):
     else:
         form = NewjoineUpdateForm()
 
-    return render(request, "Projects/newjoinee_update_form.html", {"form": form})
+    return render(request, "Projects/newjoinee_u.html", {"form": form})
 
 
 
@@ -67,7 +67,7 @@ def hr_update_view(request):
     else:
         form = HrUpdateForm()
 
-    return render(request, "Projects/hr_update_form.html", {"form": form})
+    return render(request, "Projects/hr_u.html", {"form": form})
 
 
 
@@ -128,6 +128,8 @@ def manager_dashboard(request):
 
 
 
+def projects_dashboard(request):
+    return render(request, "Projects/pjdash.html")
 
 
 

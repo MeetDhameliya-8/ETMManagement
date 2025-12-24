@@ -1,7 +1,8 @@
+
 {% extends "Projects/base.html" %}
+{% load static %}
 
 {% block title %}Employee Update{% endblock %}
-
 {% block content %}
 <div class="card shadow-sm">
   <div class="card-body">
@@ -28,9 +29,13 @@
 
       <div class="d-flex gap-2">
         <button class="btn btn-primary" type="submit">Save</button>
-        <a class="btn btn-outline-secondary" href="{% url 'employee_list' %}">Back to list</a>
+        <a class="btn btn-outline-secondary" href="#">Back to list</a>
       </div>
     </form>
   </div>
 </div>
 {% endblock %}
+
+
+
+
