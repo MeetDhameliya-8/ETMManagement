@@ -36,6 +36,14 @@ class EmployeeUpdate(models.Model):
     Things_To_Notice = models.TextField(blank=True, null=True)
     Deadline = models.DateTimeField(blank=True, null=True)
 
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.Project or "Employee Update"
 
@@ -46,8 +54,17 @@ class InternUpdate(models.Model):
     Source = models.CharField(max_length=255, blank=True, null=True)
     WorkWith = models.TextField(blank=True, null=True)
 
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.Project or "Intern Update"
+
 
 
 class NewjoineUpdate(models.Model):
@@ -55,8 +72,17 @@ class NewjoineUpdate(models.Model):
     FieldToDecide = models.TextField(blank=True, null=True)
     BePreparedFor = models.CharField(max_length=255, blank=True, null=True)
 
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.Announcement or "New Joinee Update"
+
 
 
 class HrUpdate(models.Model):
@@ -65,6 +91,14 @@ class HrUpdate(models.Model):
     Notice = models.TextField(blank=True, null=True)
     Celebration = models.TextField(blank=True, null=True)
     Preparation = models.TextField(blank=True, null=True)
+
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.NewRule or "HR Update"

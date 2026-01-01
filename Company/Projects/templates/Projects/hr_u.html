@@ -2,9 +2,47 @@
 {% block title %}HR Update{% endblock %}
 
 {% block content %}
+
+<!-- 🔹 EXISTING HR UPDATES (ADMIN + DOMAIN DATA) -->
+<h4 class="mb-3">HR Updates</h4>
+
+{% for u in updates %}
+  <div class="card mb-3 border-start border-success shadow-sm">
+    <div class="card-body">
+
+      {% if u.taskUpdate %}
+        <p><strong>Task Update:</strong> {{ u.taskUpdate }}</p>
+      {% endif %}
+
+      {% if u.NewRule %}
+        <p><strong>New Rule:</strong> {{ u.NewRule }}</p>
+      {% endif %}
+
+      {% if u.Notice %}
+        <p><strong>Notice:</strong> {{ u.Notice }}</p>
+      {% endif %}
+
+      {% if u.Celebration %}
+        <p><strong>Celebration:</strong> {{ u.Celebration }}</p>
+      {% endif %}
+
+      {% if u.Preparation %}
+        <p><strong>Preparation:</strong> {{ u.Preparation }}</p>
+      {% endif %}
+
+    </div>
+  </div>
+{% empty %}
+  <p class="text-muted">No HR updates yet.</p>
+{% endfor %}
+
+<hr class="my-4">
+
+<!-- 🔹 YOUR ORIGINAL FORM (UNCHANGED) -->
 <div class="card">
   <div class="card-body">
     <h3>HR Update</h3>
+
     <form method="post" novalidate>
       {% csrf_token %}
       {{ form.as_p }}
@@ -12,4 +50,6 @@
     </form>
   </div>
 </div>
+
 {% endblock %}
+

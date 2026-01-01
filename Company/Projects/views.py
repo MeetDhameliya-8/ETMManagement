@@ -8,66 +8,115 @@ from .decorators import manager_required
 from django.contrib.auth.decorators import login_required
 from Profile.models import EmployeeProfile, User
 from functools import wraps
-from .models import Project
+from .models import Project,EmployeeUpdate,InternUpdate,HrUpdate,NewjoineUpdate
 from .forms import EmployeeUpdateForm, InternUpdateForm, NewjoineUpdateForm, HrUpdateForm
-
+from Interactions.forms import CommunicationForm
 
 # below 4 functions are for forms
 
 
 
 
+
+
 def employee_update_view(request):
+    updates = EmployeeUpdate.objects.all().order_by("-created_at")
+
     if request.method == "POST":
         form = EmployeeUpdateForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("employee_update_success")  # define this url
+            obj = form.save(commit=False)
+            obj.created_by = request.user
+            obj.save()
+            return redirect("employee_update")
     else:
         form = EmployeeUpdateForm()
 
-    return render(request, "Projects/employee_u.html", {"form": form})
+    return render(
+        request,
+        "Projects/employee_u.html",
+        {
+            "form": form,
+            "updates": updates,
+            "communication_form": CommunicationForm(),  # 🔑
+        }
+    )
+
+
 
 
 
 def intern_update_view(request):
+    updates = InternUpdate.objects.all().order_by("-created_at")
+
     if request.method == "POST":
         form = InternUpdateForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("intern_update_success")
+            obj = form.save(commit=False)
+            obj.created_by = request.user
+            obj.save()
+            return redirect("intern_update")
     else:
         form = InternUpdateForm()
 
-    return render(request, "Projects/intern_u.html", {"form": form})
+    return render(
+        request,
+        "Projects/intern_u.html",
+        {
+            "form": form,
+            "updates": updates,
+        }
+    )
 
 
 
 
 def newjoinee_update_view(request):
+    updates = NewjoineUpdate.objects.all().order_by("-created_at")
+
     if request.method == "POST":
         form = NewjoineUpdateForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("newjoinee_update_success")
+            obj = form.save(commit=False)
+            obj.created_by = request.user
+            obj.save()
+            return redirect("newjoinee_update")
     else:
         form = NewjoineUpdateForm()
 
-    return render(request, "Projects/newjoinee_u.html", {"form": form})
+    return render(
+        request,
+        "Projects/newjoinee_u.html",
+        {
+            "form": form,
+            "updates": updates,
+        }
+    )
 
 
 
 
 def hr_update_view(request):
+    updates = HrUpdate.objects.all().order_by("-created_at")
+
     if request.method == "POST":
         form = HrUpdateForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("hr_update_success")
+            obj = form.save(commit=False)
+            obj.created_by = request.user
+            obj.save()
+            return redirect("hr_update")
     else:
         form = HrUpdateForm()
 
-    return render(request, "Projects/hr_u.html", {"form": form})
+    return render(
+        request,
+        "Projects/hr_u.html",
+        {
+            "form": form,
+            "updates": updates,
+        }
+    )
 
 
 

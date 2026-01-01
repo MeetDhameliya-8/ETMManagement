@@ -9,6 +9,9 @@ urlpatterns = [
     # Screensite pages (login, signup, etc.)
     path('', include('Screensite.urls')),
 
+    # For communication
+    path('interactions/', include('Interactions.urls')),
+
     # Projects app URLs start with /Projects/
     path('Projects/', include(('Projects.urls', 'Projects'), namespace='Projects')),
 ]

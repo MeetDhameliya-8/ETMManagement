@@ -2,15 +2,57 @@
 {% block title %}Intern Update{% endblock %}
 
 {% block content %}
+
+<!-- 🔹 EXISTING INTERN UPDATES (ADMIN + DOMAIN DATA) -->
+<h4 class="mb-3">Intern Updates</h4>
+
+{% for u in updates %}
+  <div class="card mb-3 border-start border-info shadow-sm">
+    <div class="card-body">
+
+      {% if u.Project %}
+        <h5>{{ u.Project }}</h5>
+      {% endif %}
+
+      {% if u.LearnToday %}
+        <p><strong>Learned Today:</strong> {{ u.LearnToday }}</p>
+      {% endif %}
+
+      {% if u.Source %}
+        <p><strong>Source:</strong> {{ u.Source }}</p>
+      {% endif %}
+
+      {% if u.WorkWith %}
+        <p>{{ u.WorkWith }}</p>
+      {% endif %}
+
+    </div>
+  </div>
+{% empty %}
+  <p class="text-muted">No intern updates yet.</p>
+{% endfor %}
+
+<hr class="my-4">
+
+<!-- 🔹 YOUR ORIGINAL FORM (UNCHANGED) -->
 <div class="card">
   <div class="card-body">
     <h3>Intern Update</h3>
+
     <form method="post" novalidate>
       {% csrf_token %}
       {{ form.as_p }}
-      <button class="btn btn-primary mt-2" type="submit">Submit</button>
-      <a class="btn btn-link" href="{% url 'Projects:intern_update' %}">View all</a>
+
+      <button class="btn btn-primary mt-2" type="submit">
+        Submit
+      </button>
+
+      <a class="btn btn-link" href="{% url 'Projects:intern_update' %}">
+        View all
+      </a>
     </form>
   </div>
 </div>
+
 {% endblock %}
+

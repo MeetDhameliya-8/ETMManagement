@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Requests',
     'Profile',
     'Projects',
+    'Interactions',
 
     #frontend
     'Screensite',
@@ -89,7 +90,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Company.wsgi.application'
 
-#5432
+#3500
 
 
 # Database
