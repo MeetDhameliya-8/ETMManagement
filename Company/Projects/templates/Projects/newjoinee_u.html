@@ -1,0 +1,53 @@
+{% extends "Projects/base.html" %}
+{% block title %}New Joinee Update{% endblock %}
+
+{% block content %}
+
+<!-- 🔹 EXISTING NEW JOINEE UPDATES (ADMIN + DOMAIN DATA) -->
+<h4 class="mb-3">New Joinee Updates</h4>
+
+{% for u in updates %}
+  <div class="card mb-3 border-start border-warning shadow-sm">
+    <div class="card-body">
+
+      {% if u.Announcement %}
+        <h5>{{ u.Announcement }}</h5>
+      {% endif %}
+
+      {% if u.FieldToDecide %}
+        <p>{{ u.FieldToDecide }}</p>
+      {% endif %}
+
+      {% if u.BePreparedFor %}
+        <p><strong>Be Prepared For:</strong> {{ u.BePreparedFor }}</p>
+      {% endif %}
+
+    </div>
+  </div>
+{% empty %}
+  <p class="text-muted">No new joinee updates yet.</p>
+{% endfor %}
+
+<hr class="my-4">
+
+<!-- 🔹 YOUR ORIGINAL FORM (UNCHANGED) -->
+<div class="card">
+  <div class="card-body">
+    <h3>New Joinee Update</h3>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="mt-3">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-secondary" href="{% url 'Projects:newjoinee_update' %}">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
