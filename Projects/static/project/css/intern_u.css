@@ -1,0 +1,89 @@
+/* =========================
+   INTERN UPDATE PAGE STYLES
+   ========================= */
+
+/* Page heading */
+h4 {
+  font-weight: 600;
+  color: #0dcaf0; /* Bootstrap info color */
+}
+
+/* Card border emphasis */
+.border-start {
+  border-left-width: 4px !important;
+}
+
+/* Intern cards */
+.card {
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Project title */
+.card-body h5 {
+  font-weight: 600;
+  color: #0b5ed7;
+  margin-bottom: 0.5rem;
+}
+
+/* Content text */
+.card-body p {
+  margin-bottom: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Highlight labels */
+.card-body strong {
+  color: #0dcaf0;
+  font-weight: 600;
+}
+
+/* Divider */
+hr {
+  border-color: #dee2e6;
+}
+
+/* Form title */
+h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Form spacing */
+form p {
+  margin-bottom: 0.8rem;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  border-radius: 6px !important;
+  padding: 0.45rem 0.65rem !important;
+}
+
+/* Buttons */
+button.btn-primary {
+  padding: 0.45rem 1.4rem;
+  font-weight: 500;
+}
+
+/* Link button */
+.btn-link {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  h4,
+  h3 {
+    text-align: center;
+  }
+}

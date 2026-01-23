@@ -1,0 +1,123 @@
+/* =========================
+   EMPLOYEE UPDATE PAGE
+   ========================= */
+
+/* Page heading */
+h4 {
+  font-weight: 600;
+  color: #0d6efd; /* Bootstrap primary */
+}
+
+/* Left border emphasis */
+.border-start {
+  border-left-width: 4px !important;
+}
+
+/* Cards */
+.card {
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Project title */
+.card-body > h5 {
+  font-weight: 600;
+  color: #0b5ed7;
+}
+
+/* Task & description text */
+.card-body p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Warning notice */
+.text-warning {
+  font-weight: 500;
+}
+
+/* Deadline text */
+small.text-muted {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* =========================
+   COMMUNICATION SECTION
+   ========================= */
+
+.card-body .bg-light {
+  background-color: #f8f9fa !important;
+}
+
+/* Communication heading */
+.card-body h6 {
+  font-weight: 600;
+  color: #495057;
+}
+
+/* Individual communication message */
+.card-body .border.rounded {
+  background-color: #ffffff;
+}
+
+/* Communication metadata */
+.card-body small {
+  font-size: 0.75rem;
+}
+
+/* Communication message */
+.card-body .border.rounded p {
+  font-size: 0.9rem;
+}
+
+/* =========================
+   FORMS (BOTTOM SECTION)
+   ========================= */
+
+/* Form title */
+h3.card-title {
+  font-weight: 600;
+}
+
+/* Form labels */
+.form-label {
+  font-weight: 500;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  border-radius: 6px !important;
+  padding: 0.45rem 0.65rem !important;
+}
+
+/* Buttons */
+button.btn-primary {
+  padding: 0.45rem 1.4rem;
+  font-weight: 500;
+}
+
+.btn-outline-secondary {
+  padding: 0.45rem 1.4rem;
+}
+
+/* =========================
+   MOBILE TWEAKS
+   ========================= */
+@media (max-width: 768px) {
+  h4,
+  h3.card-title {
+    text-align: center;
+  }
+
+  .d-flex.gap-2 {
+    flex-direction: column;
+  }
+}

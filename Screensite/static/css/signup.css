@@ -1,0 +1,18 @@
+/* =========================
+   SIGNUP PAGE STYLES
+   ========================= */
+
+@import url("login.css");
+
+/* Accent tweak */
+.glass-card h2 {
+  color: #198754; /* green */
+}
+
+.glass-card button {
+  background-color: #198754;
+}
+
+.glass-card button:hover {
+  background-color: #157347;
+}

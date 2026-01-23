@@ -1,0 +1,33 @@
+{% extends "Projects/base_dashboard.html" %}
+
+{% block content %}
+
+<div class="project-section">
+    <h2>Your Projects</h2>
+</div>
+
+<div class="project-section">
+    {% if projects %}
+        {% for project in projects %}
+            <div class="project-card">
+                <h3>{{ project.title }}</h3>
+                <p>Deadline: {{ project.deadline }}</p>
+                <p>Status: {{ project.status }}</p>
+
+               
+
+                <a href="{% url 'Projects:project_detail' project.id %}">
+                    <button class="view-btn">View Details</button>
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No projects created yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+
+
+

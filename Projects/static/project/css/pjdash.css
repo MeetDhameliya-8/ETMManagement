@@ -1,0 +1,41 @@
+/* =========================
+   PROJECT DASHBOARD STYLES
+   ========================= */
+
+/* Page heading */
+h2 {
+  font-weight: 600;
+  color: #212529;
+}
+
+/* Card polish */
+.card {
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Card title */
+.card-body h5 {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+/* Button consistency */
+.card-body .btn {
+  padding: 0.45rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive spacing tweak */
+@media (max-width: 768px) {
+  h2 {
+    text-align: center;
+  }
+}

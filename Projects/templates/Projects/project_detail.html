@@ -1,0 +1,112 @@
+{% extends 'Projects/base_dashboard.html' %}
+
+{% block page_header %}
+
+<div class="page-heading-flex">
+    
+    <!-- LEFT SIDE -->
+    <h1>{{ project.title }}</h1>
+
+    <!-- RIGHT SIDE (grouped) -->
+    <div style="display: flex; align-items: center; gap: 15px;">   
+        <a href="{% url 'Projects:add_task' project.id %}" class="btn-create">Add Task</a>
+
+        <a href="{% url 'Projects:assign_members' project.id %}" class="btn-create">
+            Assign Members
+        </a>
+
+        <span class="status-badge" > {{ project.status }} </span>
+    </div>
+
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+<p class="desc">{{ project.description }}</p>
+
+<div class="project-info-wrapper">
+
+    <!-- Deadline Countdown -->
+    <div class="info-card">
+        <h3>Deadline</h3>                                           
+        <p id="deadline-date">{{ project.deadline }}</p>
+        <div id="countdown" class="countdown"></div>                             
+    </div>
+
+    <!-- Team Members -->
+    <div class="info-card">
+        <h3>Team Members</h3>
+        {% for member in project.team_members.all %}
+            <div class="member-tag">
+                👤 {{ member.managerprofile.FullName|default:member.email }}
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="task-section">
+    <div class="task-list">
+    {% for task in tasks %}
+
+        <div class="task-card">
+            <h3>{{ task.title }}</h3>
+            <p>{{ task.description }}</p>
+            <span class="task-status {{ task.status }}">{{ task.status }}</span>
+        </div>
+
+    {% empty %}
+        <p>No tasks added yet.</p>
+    {% endfor %}
+
+</div>
+    <a href="{% url 'Projects:manager_dashboard' %}" class="btn-create">Back to Dashboard</a>
+</div>
+
+<script>
+
+    function countdown() {
+        const deadline = new Date(document.getElementById("deadline-date").textContent).getTime();
+        const x = setInterval(function () {
+            const now = new Date().getTime();
+            const diff = deadline - now;
+
+            if (diff < 0) {
+                document.getElementById("countdown").innerHTML = "Deadline Passed!";
+                clearInterval(x);
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById("countdown").innerHTML =
+                days + "d " + hours + "h " + minutes + "m ";
+        }, 1000);
+    }
+
+    countdown();
+    
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

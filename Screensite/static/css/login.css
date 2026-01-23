@@ -1,0 +1,118 @@
+/* =========================
+   LOGIN PAGE STYLES
+   ========================= */
+
+/* Page reset */
+* {
+  box-sizing: border-box;
+}
+
+/* Full-page center */
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial,
+               sans-serif;
+
+  background: linear-gradient(135deg, #e9f2ff, #f8fbff);
+}
+
+/* Glass card */
+.glass-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 2rem 2.2rem;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Heading */
+.glass-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+/* Error message */
+.error {
+  background-color: #fdecea;
+  color: #b02a37;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Form inputs */
+.glass-card input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  margin-bottom: 0.9rem;
+
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 0.95rem;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card input:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.15);
+}
+
+/* Login button */
+.glass-card button {
+  width: 100%;
+  padding: 0.55rem;
+
+  background-color: #0d6efd;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.glass-card button:hover {
+  background-color: #0b5ed7;
+}
+
+/* Signup text */
+.glass-card p {
+  font-size: 0.85rem;
+  color: #495057;
+}
+
+.glass-card a {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.glass-card a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile tweak */
+@media (max-width: 420px) {
+  .glass-card {
+    padding: 1.6rem 1.4rem;
+  }
+}
